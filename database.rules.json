@@ -1,0 +1,49 @@
+{
+  "rules": {
+    ".read": true,
+    "projects": {
+      ".write": "auth != null && auth.token.email === 'samuvel1official@gmail.com'",
+      "$projectId": {
+        ".validate": "newData.hasChildren(['title', 'description', 'technologies', 'imageUrl', 'imagePublicId', 'featured', 'createdAt'])",
+        "title": { ".validate": "newData.isString() && newData.val().length > 0" },
+        "description": { ".validate": "newData.isString() && newData.val().length > 0" },
+        "technologies": { 
+          ".validate": "newData.hasChildren()",
+          "$index": {
+            ".validate": "newData.isString() && newData.val().length > 0"
+          }
+        },
+        "imageUrl": { ".validate": "newData.isString() && newData.val().length > 0" },
+        "imagePublicId": { ".validate": "newData.isString() && newData.val().length > 0" },
+        "videoUrl": { ".validate": "!newData.exists() || newData.isString()" },
+        "videoPublicId": { ".validate": "!newData.exists() || newData.isString()" },
+        "liveUrl": { ".validate": "!newData.exists() || newData.isString()" },
+        "githubUrl": { ".validate": "!newData.exists() || newData.isString()" },
+        "featured": { ".validate": "newData.isBoolean()" },
+        "createdAt": { ".validate": "newData.isString() && newData.val().length > 0" },
+        "$other": { ".validate": false }
+      }
+    },
+    "certificates": {
+      ".write": "auth != null && auth.token.email === 'samuvel1official@gmail.com'",
+      "$certificateId": {
+        ".validate": "newData.hasChildren(['title', 'issuingOrganization', 'issueDate', 'imageUrl', 'imagePublicId', 'createdAt'])",
+        "title": { ".validate": "newData.isString() && newData.val().length > 0" },
+        "issuingOrganization": { ".validate": "newData.isString() && newData.val().length > 0" },
+        "issueDate": { ".validate": "newData.isString() && newData.val().length > 0" },
+        "credentialId": { ".validate": "!newData.exists() || newData.isString()" },
+        "credentialUrl": { ".validate": "!newData.exists() || newData.isString()" },
+        "imageUrl": { ".validate": "newData.isString() && newData.val().length > 0" },
+        "imagePublicId": { ".validate": "newData.isString() && newData.val().length > 0" },
+        "createdAt": { ".validate": "newData.isString() && newData.val().length > 0" },
+        "$other": { ".validate": false }
+      }
+    },
+    "settings": {
+      ".write": "auth != null && auth.token.email === 'samuvel1official@gmail.com'",
+      "maintenanceMode": { ".validate": "newData.isBoolean()" },
+      "maintenanceMessage": { ".validate": "newData.isString()" },
+      "maintenanceEndTime": { ".validate": "!newData.exists() || newData.isString()" }
+    }
+  }
+}
